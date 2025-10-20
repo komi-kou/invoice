@@ -215,7 +215,7 @@ export default function Home() {
                         if (invoicePreviewRef.current) {
                           try {
                             const filename = `invoice_${invoiceData.invoiceNumber}_${format(new Date(), 'yyyyMMdd')}.pdf`;
-                            await generatePDFFromElement(invoicePreviewRef.current, filename);
+                            await generatePDF('invoice-preview', filename);
                           } catch (error) {
                             alert('PDF生成中にエラーが発生しました: ' + (error as Error).message);
                           }
@@ -243,7 +243,7 @@ export default function Home() {
                         if (receiptPreviewRef.current) {
                           try {
                             const filename = `receipt_${receiptData.receiptNumber}_${format(new Date(), 'yyyyMMdd')}.pdf`;
-                            await generatePDFFromElement(receiptPreviewRef.current, filename);
+                            await generatePDF('receipt-preview', filename);
                           } catch (error) {
                             alert('PDF生成中にエラーが発生しました: ' + (error as Error).message);
                           }

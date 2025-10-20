@@ -9,9 +9,10 @@ import { Plus, Trash2, Save, FileDown } from 'lucide-react';
 interface InvoiceFormProps {
   onSubmit: (data: InvoiceData) => void;
   initialData?: Partial<InvoiceData>;
+  darkMode?: boolean;
 }
 
-export default function InvoiceForm({ onSubmit, initialData }: InvoiceFormProps) {
+export default function InvoiceForm({ onSubmit, initialData, darkMode }: InvoiceFormProps) {
   const [formData, setFormData] = useState<InvoiceData>({
     invoiceNumber: '',
     issueDate: '',

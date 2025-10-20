@@ -9,9 +9,10 @@ import Image from 'next/image';
 interface ReceiptFormProps {
   onSubmit: (data: ReceiptData) => void;
   initialData?: Partial<ReceiptData>;
+  darkMode?: boolean;
 }
 
-export default function ReceiptForm({ onSubmit, initialData }: ReceiptFormProps) {
+export default function ReceiptForm({ onSubmit, initialData, darkMode }: ReceiptFormProps) {
   const [formData, setFormData] = useState<ReceiptData>({
     receiptNumber: '',
     issueDate: '',
