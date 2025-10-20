@@ -10,9 +10,9 @@ import ReceiptPreview from '@/components/ReceiptPreview';
 const Dashboard = lazy(() => import('@/components/Dashboard'));
 const DocumentHistory = lazy(() => import('@/components/DocumentHistory'));
 import { InvoiceData } from '@/types/invoice';
-import { ReceiptData, DocumentType } from '@/types/document';
+import { ReceiptData } from '@/types/document';
 import { createPDF } from '@/lib/simple-pdf';
-import { FileText, Download, History, PlusCircle, Receipt, FileCheck, BarChart3, FileDown, Eye } from 'lucide-react';
+import { FileText, Download, History, PlusCircle, Receipt, FileCheck, BarChart3, Eye } from 'lucide-react';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<'dashboard' | 'invoice' | 'receipt' | 'history'>('dashboard');

@@ -4,6 +4,7 @@ import React, { forwardRef } from 'react';
 import { ReceiptData } from '@/types/document';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
+import Image from 'next/image';
 
 interface ReceiptPreviewProps {
   data: ReceiptData;
@@ -99,9 +100,11 @@ const ReceiptPreview = forwardRef<HTMLDivElement, ReceiptPreviewProps>(
             {/* 印鑑スペース */}
             <div className="ml-8">
               {data.issuer.sealImage ? (
-                <img
+                <Image
                   src={data.issuer.sealImage}
                   alt="印鑑"
+                  width={96}
+                  height={96}
                   className="w-24 h-24 object-contain"
                 />
               ) : (

@@ -39,7 +39,8 @@ const Tooltip = dynamic(
 const Legend = dynamic(
   () => import('recharts').then(mod => mod.Legend),
   { ssr: false }
-);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+) as React.ComponentType<any>;
 const PieChart = dynamic(
   () => import('recharts').then(mod => mod.PieChart),
   { ssr: false }
@@ -53,8 +54,6 @@ const Cell = dynamic(
   { ssr: false }
 );
 
-interface DashboardProps {}
-
 interface MonthlyStats {
   month: string;
   invoiceCount: number;
@@ -65,7 +64,7 @@ interface MonthlyStats {
   totalAmount: number;
 }
 
-export default function Dashboard({}: DashboardProps) {
+export default function Dashboard() {
   const [monthlyStats, setMonthlyStats] = useState<MonthlyStats[]>([]);
   const [currentMonthStats, setCurrentMonthStats] = useState<MonthlyStats | null>(null);
 
@@ -125,7 +124,6 @@ export default function Dashboard({}: DashboardProps) {
     setMonthlyStats(stats.slice(0, 6));
   };
 
-  const COLORS = ['#3B82F6', '#60A5FA'];
 
   const pieData = currentMonthStats ? [
     { name: '請求書', value: currentMonthStats.invoiceAmount },
@@ -254,7 +252,8 @@ export default function Dashboard({}: DashboardProps) {
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    label={(props: any) => `${(props.percent * 100).toFixed(0)}%`}
                     outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"
@@ -264,7 +263,8 @@ export default function Dashboard({}: DashboardProps) {
                     ))}
                   </Pie>
                   <Tooltip 
-                    formatter={(value: number) => `¥${value.toLocaleString()}`}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    formatter={(value: any) => `¥${value.toLocaleString()}`}
                     contentStyle={{ 
                       backgroundColor: '#FFFFFF',
                       border: '1px solid #E5E7EB',
@@ -276,7 +276,8 @@ export default function Dashboard({}: DashboardProps) {
                     verticalAlign="bottom" 
                     height={36}
                     iconType="circle"
-                    formatter={(value) => value === '請求書' ? '請求書' : '領収書'}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    formatter={(value: any) => value === '請求書' ? '請求書' : '領収書'}
                   />
                 </PieChart>
               </ResponsiveContainer>

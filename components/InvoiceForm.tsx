@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { InvoiceData, InvoiceItem } from '@/types/invoice';
 import { storage } from '@/lib/storage';
 import { format } from 'date-fns';
-import { ja } from 'date-fns/locale';
 import { Plus, Trash2, Save, FileDown } from 'lucide-react';
 
 interface InvoiceFormProps {
@@ -86,11 +85,7 @@ export default function InvoiceForm({ onSubmit, initialData }: InvoiceFormProps)
     }
   }, [initialData]);
 
-  useEffect(() => {
-    calculateTotals();
-  }, [formData.items, formData.taxRate]);
-
-  const calculateTotals = () => {
+  const calculateTotals = useCallback(() => {
     const subtotal = formData.items.reduce((sum, item) => sum + item.amount, 0);
     const taxAmount = Math.floor(subtotal * (formData.taxRate / 100));
     const totalAmount = subtotal + taxAmount;
@@ -101,9 +96,13 @@ export default function InvoiceForm({ onSubmit, initialData }: InvoiceFormProps)
       taxAmount,
       totalAmount,
     }));
-  };
+  }, [formData.items, formData.taxRate]);
 
-  const handleItemChange = (index: number, field: keyof InvoiceItem, value: any) => {
+  useEffect(() => {
+    calculateTotals();
+  }, [calculateTotals]);
+
+  const handleItemChange = (index: number, field: keyof InvoiceItem, value: string | number) => {
     const newItems = [...formData.items];
     newItems[index] = { ...newItems[index], [field]: value };
 

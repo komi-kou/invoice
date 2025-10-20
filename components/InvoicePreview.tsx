@@ -83,7 +83,7 @@ const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
               </tr>
             </thead>
             <tbody>
-              {data.items.map((item, index) => (
+              {data.items.map((item) => (
                 <tr key={item.id}>
                   <td className="border border-gray-400 px-4 py-2">{item.description}</td>
                   <td className="border border-gray-400 px-4 py-2 text-right">{item.quantity}</td>

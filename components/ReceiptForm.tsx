@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ReceiptData } from '@/types/document';
 import { format } from 'date-fns';
 import { Save, FileDown, Upload, X } from 'lucide-react';
+import Image from 'next/image';
 
 interface ReceiptFormProps {
   onSubmit: (data: ReceiptData) => void;
@@ -85,7 +86,7 @@ export default function ReceiptForm({ onSubmit, initialData }: ReceiptFormProps)
         },
       }));
     }
-  }, [formData.breakdown?.subtotal, formData.breakdown?.taxRate, showBreakdown]);
+  }, [formData.breakdown?.subtotal, formData.breakdown?.taxRate, showBreakdown, formData.breakdown]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -373,9 +374,11 @@ export default function ReceiptForm({ onSubmit, initialData }: ReceiptFormProps)
           </label>
           {formData.issuer.sealImage && (
             <div className="relative">
-              <img
+              <Image
                 src={formData.issuer.sealImage}
                 alt="印鑑"
+                width={80}
+                height={80}
                 className="h-20 w-20 object-contain border rounded"
               />
               <button

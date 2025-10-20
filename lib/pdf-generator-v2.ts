@@ -10,7 +10,7 @@ function cleanupStyles(element: HTMLElement): void {
     
     // oklch関数を含むスタイルを標準的な色に変換
     ['backgroundColor', 'color', 'borderColor'].forEach(prop => {
-      const value = computedStyle.getPropertyValue(prop as any);
+      const value = computedStyle.getPropertyValue(prop);
       if (value && value.includes('oklch')) {
         // デフォルトの色に置き換え
         if (prop === 'backgroundColor') {
